@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service'
 
 @Component({
   selector: 'app-form',
@@ -7,31 +8,54 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
+  
+  mismatcherror:string="";
+  fillmsg: string="";
 
-  constructor() { }
+  constructor(public authservice:AuthService) { }
 
   ngOnInit(): void {
   }
-  matchingPasswords = (control: AbstractControl): {[key: string]: boolean} =>{
+  matchingPasswords=(control:FormGroup)=>{
 
-    const newPassword = control.get('passwords');
-    const confirmPassword = control.get('confirmpwd');
+    const newPassword = control.get('password');
+    const confirmPassword = control.get('cPassword');
     // if no values, valid
     if (!newPassword || !confirmPassword) {
       return null;
     } 
-    console.log("test")
+  
+    if(newPassword.value != confirmPassword.value){
+      this.mismatcherror="password mismatch"
+    }
+    else{
+      this.mismatcherror=""
+    }
+ 
     // if values match return null, else 'mismatchedPasswords:true'  
-    return newPassword.value === confirmPassword.value ? null : { mismatchedPasswords: true };
+    return newPassword.value === confirmPassword.value ? null : { mismatchedPasswords: true }
   }    
   registration: FormGroup= new FormGroup({
     firstName: new FormControl('',[Validators.required]),
     lastName:  new FormControl('',[Validators.required]),
     userName:  new FormControl('',[Validators.required]),
-    password:  new FormControl('',[Validators.required,Validators.min(8)]),
-    cPassword: new FormControl('',[Validators.required,Validators.min(8)])
+    password:  new FormControl('',[Validators.required,Validators.minLength(8)]),
+    cPassword: new FormControl('',[Validators.required,Validators.minLength(8)])
 
-  }, this.matchingPasswords);
+  },  {validators: this.matchingPasswords});
+  getmessage(){
+    return "minimum 8 charachters required"
+  }
 
+
+  onSubmit(){
+    if(this.registration.invalid){
+      this.fillmsg="*fill all fields."
+      return
+    }
+   this.authservice.register(this.registration.value.firstName,this.registration.value.lastName,this.registration.value.userName,this.registration.value.password,)
+   
+    
+  }
 
 }

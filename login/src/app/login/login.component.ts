@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
   get emailInput() { return this.signin.get('username'); }
   get passwordInput() { return this.signin.get('password'); }  
  onSubmit(){
-   console.log("test")
+   console.log(this.emailInput.value)
+   console.log(this.passwordInput.value)
  }
  getErrorMessage() {
   if (this.signin.get('password').hasError('required')) {
