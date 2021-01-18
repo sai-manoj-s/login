@@ -1,0 +1,22 @@
+p{
+   margin-left: 20px;
+    font-size: large;
+    font-weight: 300;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+.outer{
+    margin: 10px;
+}
+.icons{
+    height: 20vh;
+    cursor: pointer
+}
+.btn-join{
+    text-decoration: none;
+    border: 1px solid green;
+    background-color:  green;
+    color:  white;
+    font-weight: 600;
+    margin: 4px;
+    }

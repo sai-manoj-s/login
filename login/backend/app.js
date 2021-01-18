@@ -1,14 +1,21 @@
 const express = require('express');
+const app = express();
 var mongoose =require('mongoose');
 const  route  = require('./routes');
 
-const app = express();
-const port=3000
+
+
+
+
+
+
+const port=process.env.PORT||3000
 app.use(express.json())
 
 app.use((req, res, next) => {
  
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Origin", "http://192.168.29.153:4200");
+    res.header('Access-Control-Allow-Credentials', true);
     res.setHeader(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
@@ -17,15 +24,19 @@ app.use((req, res, next) => {
       "Access-Control-Allow-Methods",
       "GET, POST, PATCH, DELETE, OPTIONS"
     );
-    
    
     next();
   });
+
+
   app.use("/api",route)
-  app.listen(port,(req,res)=>{
+  app.listen(port,"0.0.0.0",(req,res)=>{
     console.log("server running")
     
   })
+
+  
+  
 
 
 

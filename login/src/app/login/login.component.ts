@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,7 @@ export class LoginComponent implements OnInit {
   
 
 
-  constructor() { }
+  constructor(private authserv:AuthService,private route: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,10 +24,10 @@ export class LoginComponent implements OnInit {
   hide = true;
   get emailInput() { return this.signin.get('username'); }
   get passwordInput() { return this.signin.get('password'); }  
- onSubmit(){
-   console.log(this.emailInput.value)
-   console.log(this.passwordInput.value)
- }
+  onSubmit(){
+  this.authserv.login(this.signin.value.username,this.signin.value.password)
+    
+  }
  getErrorMessage() {
   if (this.signin.get('password').hasError('required')) {
     return 'You must enter password';

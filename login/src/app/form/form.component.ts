@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service'
+import { NotificationService } from './../notification.service'
 
 @Component({
   selector: 'app-form',
@@ -12,7 +13,7 @@ export class FormComponent implements OnInit {
   mismatcherror:string="";
   fillmsg: string="";
 
-  constructor(public authservice:AuthService) { }
+  constructor(public authservice:AuthService,public notify:NotificationService) { }
 
   ngOnInit(): void {
   }
@@ -46,16 +47,28 @@ export class FormComponent implements OnInit {
   getmessage(){
     return "minimum 8 charachters required"
   }
+  onlyAlpha(){
+    return "name should not contain numbers"
+  }
 
 
   onSubmit(){
-    if(this.registration.invalid){
+    console.log(this.registration)
+    if(this.registration.value.firstName===""||this.registration.value.lastName===""||this.registration.value.userName===""||this.registration.value.password===""||this.registration.value.cPassword===""){
+    
       this.fillmsg="*fill all fields."
       return
     }
-   this.authservice.register(this.registration.value.firstName,this.registration.value.lastName,this.registration.value.userName,this.registration.value.password,)
-   
+ this.authservice.register(this.registration.value.firstName,this.registration.value.lastName,this.registration.value.userName,this.registration.value.password)
+
     
   }
+
+  showToasterSuccess(){
+    this.notify.showSuccess("sucess","teest")
+  }
+  
+  
+
 
 }

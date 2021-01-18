@@ -1,16 +1,19 @@
+
 <mat-card>
-  <mat-card-title>Register</mat-card-title>
+  <mat-card-title>Register Here</mat-card-title>
   <mat-card-content>
     <p style="font-size: 12px; color: red;" >{{fillmsg}}</p>
     <form [formGroup]="registration" (ngSubmit)="onSubmit()">
       <mat-form-field>
         <mat-label>First Name</mat-label>
-        <input matInput formControlName="firstName">
+        <input matInput formControlName="firstName" pattern="[a-zA-Z ]*">
+        <mat-error>{{onlyAlpha()}}</mat-error>
       </mat-form-field>
       <br>
       <mat-form-field>
         <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastName">
+        <input matInput formControlName="lastName" pattern="[a-zA-Z ]*">
+        <mat-error>{{onlyAlpha()}}</mat-error>
       </mat-form-field>
       <br>
       <mat-form-field>
@@ -39,3 +42,4 @@
     </div>
   </mat-card-content>
 </mat-card>
+ 

@@ -1,1 +1,21 @@
-<p>profile works!</p>
+<h3>Welcome {{username}}</h3>
+<div class="row outer">
+<div class="col-md-3">
+    <!-- <img class=" icons icons-start" src="../../assets/join.jpg" (click)="gotoMeeting()">
+    <br>
+    <p>Start meeting</p> -->
+    <a href="https://finalcallapp.herokuapp.com">  <img class=" icons icons-start" src="../../assets/join.jpg">
+        <br>
+        <input type="button"  value="Start meeting "class="btn-join"></a>
+</div>
+<div class="col-md-3">
+    <img class="icons icons-join" src="../../assets/meeting.png">
+    <br>
+    <label>Enter the meeting id :-</label>
+   <input type="text" [(ngModel)]="meetingid">
+   <br>
+   
+   <a href="https://finalcallapp.herokuapp.com/{{meetingid}}" class="  btn-join">Join Meeting</a>
+   
+</div>
+</div>

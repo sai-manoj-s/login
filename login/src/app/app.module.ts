@@ -18,8 +18,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { FormComponent } from './form/form.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NotifierModule } from 'angular-notifier';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { ToastrModule } from 'ngx-toastr';
+import { MymeetingComponent } from './mymeeting/mymeeting.component'
 
 
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 
 
@@ -29,14 +34,15 @@ import { ProfileComponent } from './profile/profile.component';
     AppComponent,
     LoginComponent,
     FormComponent,
-    ProfileComponent
+    ProfileComponent,
+    MymeetingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule ,
     BrowserAnimationsModule,
-    
+    NotifierModule,
     MatCardModule,
     MatFormFieldModule,
     FormsModule,
@@ -44,7 +50,10 @@ import { ProfileComponent } from './profile/profile.component';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    SocketIoModule.forRoot(config)
+
     
   ],
   providers: [],
