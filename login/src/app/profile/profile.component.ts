@@ -16,9 +16,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.username=localStorage.getItem("userId")
   }
-  gotoMeeting(){
-   
-     this.router.navigate(['start'])
-  }
+
 
 }

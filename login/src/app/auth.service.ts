@@ -5,7 +5,8 @@ import { authData } from 'authData'
 import { NotificationService } from './notification.service';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { response } from 'express';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class AuthService {
   constructor(private http:HttpClient,private notify:NotificationService,private route:Router) { }
   resmsg:string
   authdata:authData
+  token:string
 
   login(uname: string, pwd: string) {
   var autheticate:string;
@@ -26,13 +28,16 @@ export class AuthService {
      }
      else{
       localStorage.setItem("token", response['token']);
-      localStorage.setItem("expiration", "1h");
+   
       localStorage.setItem("userId", response['userName']);
       this.route.navigate(['/profile'])
-   
+     
+      this.getToken()
      return autheticate
      }
    });
+
+   
 
 
   }
@@ -55,14 +60,29 @@ export class AuthService {
     
   }
 
-  getRoom(){
-    this.http.get("http://localhost:3000/room").subscribe(response=>{
-      console.log(response)
-
-    })
+  getToken(): string {
+    if (!this.token) {
+      this.token = localStorage.getItem('token');
+    }
+    return this.token;
   }
 
+  public logout(): void {
+    this.token = '';
+    window.localStorage.removeItem('token');
+    this.route.navigateByUrl('/');
+  }
+ 
+  public isLoggedIn(): boolean {
+    
+    if (this.token) {
+      return true
+    } else {
+      return false;
+    }
+  }
 
   
     
   }
+ 

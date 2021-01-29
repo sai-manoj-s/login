@@ -45,7 +45,7 @@ routes.post("/register",jsonParser,(req,res, next)=>{
 routes.post("/login",(req,res)=>{
     
         User.findOne({"userName":req.body.userName}).then(result=>{
-            console.log(result)
+           let uname=result.firstName
             if(result===null){
                 return res.status(201).json({"message":"incorrect username"})
             }
@@ -53,9 +53,10 @@ routes.post("/login",(req,res)=>{
                 if(!result){
                    return  res.status(201).json({'message':'incorrect password'})
                 }
-                const uname=result.firstName;
+                
                 const token = jwt.sign({userId:result._id,fname:result.firstName,lname:result.lastName},"qazswedxcsaqqewaxeaSZFDWAERDSFASAERQWREASDF",{expiresIn:"1h"})
-               res.status(200).json(
+                console.log(result)
+                res.status(200).send(
                 {   "token": token,
                     "message":"authenticate",
                     "userName":uname

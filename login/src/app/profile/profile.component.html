@@ -1,10 +1,8 @@
-<h3>Welcome {{username}}</h3>
-<div class="row outer">
+<h1 style="text-align: center;">Welcome {{username}}</h1>
+<div class="row outer" style="margin: 100px;">
 <div class="col-md-3">
-    <!-- <img class=" icons icons-start" src="../../assets/join.jpg" (click)="gotoMeeting()">
-    <br>
-    <p>Start meeting</p> -->
-    <a href="https://finalcallapp.herokuapp.com">  <img class=" icons icons-start" src="../../assets/join.jpg">
+
+    <a  id ="link" href="https://myvideocallroom.herokuapp.com/?uname={{username}}">  <img class=" icons icons-start" src="../../assets/join.jpg">
         <br>
         <input type="button"  value="Start meeting "class="btn-join"></a>
 </div>
@@ -15,7 +13,19 @@
    <input type="text" [(ngModel)]="meetingid">
    <br>
    
-   <a href="https://finalcallapp.herokuapp.com/{{meetingid}}" class="  btn-join">Join Meeting</a>
+   <a  id ="link" href="https://myvideocallroom.herokuapp.com/{{meetingid}}?uname={{username}}" class="  btn-join">Join Meeting</a>
    
 </div>
 </div>
+<script>
+
+
+// $('#link').on('click', function(e){
+//     e.preventDefault();
+//     var urlString = $(this).attr('href');
+//     var newURL = urlString + "?uname=param";
+//     window.open(newURL, '_blank');
+// });
+
+
+</script>

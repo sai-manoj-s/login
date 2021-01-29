@@ -21,7 +21,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { NotifierModule } from 'angular-notifier';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ToastrModule } from 'ngx-toastr';
-import { MymeetingComponent } from './mymeeting/mymeeting.component'
+import { MymeetingComponent } from './mymeeting/mymeeting.component';
+import { AuthgaurdService } from './authgaurd.service';
+
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -35,7 +37,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     LoginComponent,
     FormComponent,
     ProfileComponent,
-    MymeetingComponent
+    MymeetingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
     
   ],
-  providers: [],
+  providers: [AuthgaurdService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
